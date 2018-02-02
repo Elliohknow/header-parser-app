@@ -2,8 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var useragent = require('express-useragent');
+var port = process.env.PORT || 3000;
 // create instance of express for app, instantiate bodyParser and cors
-var app = module.exports = express();
+var app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(useragent.express());
@@ -19,6 +20,8 @@ app.get(api, function (req, res, next) {
   res.json({'IPaddress': ipaddress, 'language': lang[0], 'software': software});
 });
 
-app.listen(3000, () => {
-  console.log('Server is up and running on port 3000');
+app.listen(port, () => {
+  console.log(`Server is up and running on port ${port}`);
 });
+
+module.exports = {app};
